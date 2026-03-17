@@ -7,8 +7,8 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/你的用户名"><img src="https://img.shields.io/github/followers/你的用户名?label=Followers&style=social" alt="GitHub Followers"></a>
-  <img src="https://komarev.com/ghpvc/?username=你的用户名&color=58a6ff&style=flat-square&label=Profile+Views" alt="Profile Views">
+  <a href="https://github.com/sicheng-svg"><img src="https://img.shields.io/github/followers/sicheng-svg?label=Followers&style=social" alt="GitHub Followers"></a>
+  <img src="https://komarev.com/ghpvc/?username=sicheng-svg&color=58a6ff&style=flat-square&label=Profile+Views" alt="Profile Views">
 </p>
 
 ---
@@ -19,7 +19,7 @@
 - 💼 游戏服务器开发实习经验（Redis-MongoDB 分层存储 / CGO 中间件）
 - 🔭 当前专注于 **C++ 后端开发** & **AI Agent / LLM 应用**方向
 - 🌱 正在学习：分布式系统、LLM 推理部署（vLLM / TensorRT-LLM）
-- 📫 联系我：`your-email@example.com`
+- 📫 联系我：`sichengxia66@gmail.com`
 
 ---
 
@@ -29,14 +29,6 @@
   <img src="https://skillicons.dev/icons?i=cpp,python,go,redis,mongodb,mysql,linux,docker,git,vscode&perline=10" />
 </p>
 
-| 领域 | 技术 |
-|------|------|
-| **语言** | C++ (11/14/17/20), Python, Go |
-| **数据库** | Redis, MongoDB, MySQL |
-| **工具链** | CMake, Protobuf, Git, Docker |
-| **基础设施** | Linux, WSL2, Nginx |
-| **探索中** | LangGraph, vLLM, llama.cpp |
-
 ---
 
 ## 🚀 Featured Projects
@@ -45,7 +37,7 @@
 <tr>
 <td width="50%">
 
-### 🎮 [Gomoku Game Server](https://github.com/你的用户名/项目名)
+### 🎮 [Gomoku Game Server](https://github.com/sicheng-svg/项目名)
 > 五子棋对战游戏服务器
 
 - 基于 C++ 实现的高并发游戏服务端
@@ -55,7 +47,7 @@
 </td>
 <td width="50%">
 
-### 📝 [Async Logging System](https://github.com/你的用户名/项目名)
+### 📝 [Async Logging System](https://github.com/sicheng-svg/项目名)
 > 高性能异步日志系统
 
 - 多级别日志（DEBUG/INFO/WARN/ERROR/FATAL）
@@ -71,12 +63,12 @@
 ## 📊 GitHub Stats
 
 <p align="center">
-  <img height="170" src="https://github-readme-stats.vercel.app/api?username=你的用户名&show_icons=true&theme=tokyonight&hide_border=true&count_private=true" />
-  <img height="170" src="https://github-readme-stats.vercel.app/api/top-langs/?username=你的用户名&layout=compact&theme=tokyonight&hide_border=true&langs_count=8" />
+  <img height="170" src="https://github-readme-stats.vercel.app/api?username=sicheng-svg&show_icons=true&theme=tokyonight&hide_border=true&count_private=true" />
+  <img height="170" src="https://github-readme-stats.vercel.app/api/top-langs/?username=sicheng-svg&layout=compact&theme=tokyonight&hide_border=true&langs_count=8" />
 </p>
 
 <p align="center">
-  <img src="https://github-readme-streak-stats.herokuapp.com?user=你的用户名&theme=tokyonight&hide_border=true" />
+  <img src="https://github-readme-streak-stats.herokuapp.com?user=sicheng-svg&theme=tokyonight&hide_border=true" />
 </p>
 
 ---
@@ -84,9 +76,9 @@
 ## 🐍 Contribution Graph
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/你的用户名/你的用户名/output/github-snake-dark.svg" />
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/你的用户名/你的用户名/output/github-snake.svg" />
-  <img alt="snake eating contributions" src="https://raw.githubusercontent.com/你的用户名/你的用户名/output/github-snake.svg" />
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/sicheng-svg/sicheng-svg/output/github-snake-dark.svg" />
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/sicheng-svg/sicheng-svg/output/github-snake.svg" />
+  <img alt="snake eating contributions" src="https://raw.githubusercontent.com/sicheng-svg/sicheng-svg/output/github-snake.svg" />
 </picture>
 
 > ⚙️ 贪吃蛇动画需要配置 GitHub Actions，详见下方说明
@@ -95,13 +87,9 @@
 
 ## 📈 LeetCode Progress
 
-<!-- 如果你有 LeetCode 账号，可以用下面的卡片 -->
-<!-- 把 your-leetcode-username 替换成你的力扣用户名 -->
-<!--
 <p align="center">
-  <img src="https://leetcard.jacoblin.cool/your-leetcode-username?theme=dark&font=Fira%20Code&ext=contest" />
+  <img src="https://leetcard.jacoblin.cool/写不来CODE?theme=dark&font=Fira%20Code&ext=contest" />
 </p>
--->
 
 ---
 
@@ -128,11 +116,10 @@
   📌 使用说明（部署后请删除此注释块）
 ============================================
 
-1. 全局替换 "你的用户名" 为你的 GitHub 用户名
-2. 替换 "项目名" 为你实际的仓库名
-3. 替换邮箱为你的真实联系方式
+1. 替换 "项目名" 为你实际的仓库名
+2. 替换邮箱为你的真实联系方式
 
-4. 【贪吃蛇动画配置】
+3. 【贪吃蛇动画配置】
    在你的同名仓库中创建 .github/workflows/snake.yml：
    
    name: Generate Snake
@@ -146,7 +133,7 @@
        steps:
          - uses: Platane/snk@v3
            with:
-             github_user_name: 你的用户名
+             github_user_name: sicheng-svg
              outputs: |
                dist/github-snake.svg
                dist/github-snake-dark.svg?palette=github-dark
@@ -159,10 +146,7 @@
    
    然后手动触发一次 workflow 即可生成蛇动画。
 
-5. 【LeetCode 卡片】
-   取消注释 LeetCode 部分，替换用户名即可
-
-6. 可根据个人喜好调整主题色：
+4. 可根据个人喜好调整主题色：
    - tokyonight（当前）
    - radical / merko / gruvbox / dracula 等
 ============================================
