@@ -26,5 +26,5 @@
 ## 🛠️ Tech Stack
 
 <p align="center">
-  <img src="https://skillicons.dev/icons?i=cpp,python,go,redis,mongodb,mysql,RabbitMQ,Kafka,langchianlinux,git,vscode&perline=10" />
+  <img src="https://skillicons.dev/icons?i=cpp,python,go,redis,mongodb,mysql,RabbitMQ,Kafka,langchian,linux,git,vscode&perline=10" />
 </p>
