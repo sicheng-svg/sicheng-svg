@@ -1,44 +1,99 @@
 import os
-import requests
 
-# 1. 配置
-REPO = os.getenv("GITHUB_REPOSITORY") # 自动获取，例如 "sicheng-svg/sicheng-svg"
-TOKEN = os.getenv("GITHUB_TOKEN")
-
-def fetch_latest_diary():
-    # 利用 GitHub API 获取带有 diary 标签的最新 issue
-    url = f"https://api.github.com/repos/{REPO}/issues?labels=diary&state=all&per_page=3"
-    headers = {"Authorization": f"token {TOKEN}"} if TOKEN else {}
-    response = requests.get(url, headers=headers)
+def generate_white_masonry_svg():
+    # 画布整体尺寸
+    width = 800
+    height = 400
     
-    if response.status_code != 200 or not response.json():
-        return "👋 欢迎来到我的主页！最近还没有更新日记哦~"
+    # 动画设置：25秒滚动一圈
+    duration = "25s"
     
-    # 拼接最近几条日记的标题或内容
-    issues = response.json()
-    diary_text = " 🌟 ".join([f"[{issue['created_at'][:10]}] {issue['title']}" for issue in issues])
-    return diary_text + " 🌟 "
+    # 定义你要展示的内容 (模拟从 GitHub Issues 抓取的数据)
+    # 分为三行，贴合你图2的交错设计
+    row1_items = [
+        {"type": "text", "width": 280, "date": "2026-03-17", "title": "优化博客 Vercel 部署与 Cloudflare 路由配置"},
+        {"type": "text", "width": 220, "date": "2026-03-16", "title": "CGO 中间件 Debug 完成"},
+        {"type": "text", "width": 260, "date": "2026-03-15", "title": "LeetCode 树结构算法复盘"},
+    ]
+    
+    row2_items = [
+        {"type": "text", "width": 200, "date": "2026-03-14", "title": "测试 3X-UI 节点连通性"},
+        # 如果是图片，你需要将其转换为 Base64，或者直接使用图床 URL (需要外网可访问)
+        {"type": "image", "width": 180, "url": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"},
+        {"type": "text", "width": 300, "date": "2026-03-12", "title": "研究 Claude Code 终端 Agent 工作流"},
+    ]
+    
+    row3_items = [
+        {"type": "text", "width": 300, "date": "2026-03-10", "title": "Redis-MongoDB 分层存储压测通过"},
+        {"type": "text", "width": 250, "date": "2026-03-08", "title": "整理 miHoYo 后端开发面经"},
+        {"type": "text", "width": 220, "date": "2026-03-05", "title": "看中一台成色不错的马自达 6"},
+    ]
 
-def generate_svg(text):
-    # 使用 SVG 的 animateTransform 实现平滑向左滚动
-    # 宽度设为 800，高度设为 40，配色贴合你的深色主题
-    svg_template = f"""<svg width="800" height="40" xmlns="http://www.w3.org/2000/svg">
+    # 行高与间距设置
+    row_y_positions = [20, 150, 280] # 三行的 Y 坐标
+    box_height = 110
+    gap = 15
+
+    def build_row_svg(items, start_y):
+        svg_elements = ""
+        current_x = 0
+        for item in items:
+            # 绘制外框
+            svg_elements += f'<rect x="{current_x}" y="{start_y}" width="{item["width"]}" height="{box_height}" class="box"/>\n'
+            
+            # 绘制内容
+            if item["type"] == "text":
+                svg_elements += f'<text x="{current_x + 15}" y="{start_y + 30}" class="date">[{item["date"]}]</text>\n'
+                # 简单处理文本换行（实际应用中可能需要根据字数自动折行）
+                svg_elements += f'<text x="{current_x + 15}" y="{start_y + 60}" class="text">{item["title"][:15]}...</text>\n'
+            elif item["type"] == "image":
+                # 图片渲染，保持长宽比填满方框中心
+                svg_elements += f'<image x="{current_x + 10}" y="{start_y + 10}" width="{item["width"] - 20}" height="{box_height - 20}" href="{item["url"]}" preserveAspectRatio="xMidYMid slice" />\n'
+            
+            current_x += item["width"] + gap
+        
+        # 返回该行的 SVG 元素和总宽度
+        return svg_elements, current_x
+
+    row1_svg, w1 = build_row_svg(row1_items, row_y_positions[0])
+    row2_svg, w2 = build_row_svg(row2_items, row_y_positions[1])
+    row3_svg, w3 = build_row_svg(row3_items, row_y_positions[2])
+
+    # 找出最长的一行作为整体循环的平移基准跨度
+    max_width = max(w1, w2, w3)
+
+    # SVG 模板拼接 - 已全部调整为亮色/白色主题
+    svg_content = f"""<svg width="{width}" height="{height}" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <style>
-        .text {{ font-family: 'Fira Code', monospace, sans-serif; font-size: 16px; fill: #58A6FF; }}
+        /* 1. 修改卡片和边框颜色 - 适应白色背景 */
+        .box {{ fill: #f6f8fa; stroke: #d1d5da; stroke-width: 1.5px; rx: 8px; }}
+        /* 2. 修改文本颜色 - 确保在浅色背景下可读 */
+        .text {{ font-family: 'Fira Code', monospace, 'Microsoft YaHei'; font-size: 14px; fill: #24292e; font-weight: bold; }}
+        .date {{ font-family: 'Fira Code', monospace; font-size: 12px; fill: #0366d6; }} /* 日期也改个更亮一点的蓝色 */
     </style>
-    <rect width="100%" height="100%" fill="#0d1117" rx="8"/>
+    
+    <rect width="100%" height="100%" fill="#ffffff" rx="8"/>
+    
     <g>
-        <text x="800" y="25" class="text" white-space="nowrap">
-            {text}
-        </text>
-        <animateTransform attributeName="transform" type="translate" from="0 0" to="-1500 0" begin="0s" dur="20s" repeatCount="indefinite" />
+        <animateTransform attributeName="transform" type="translate" from="0 0" to="-{max_width} 0" begin="0s" dur="{duration}" repeatCount="indefinite" />
+        
+        <g>
+            {row1_svg}
+            {row2_svg}
+            {row3_svg}
+        </g>
+        
+        <g transform="translate({max_width}, 0)">
+            {row1_svg}
+            {row2_svg}
+            {row3_svg}
+        </g>
     </g>
 </svg>"""
-    
+
     with open("diary.svg", "w", encoding="utf-8") as f:
-        f.write(svg_template)
+        f.write(svg_content)
+    # print("生成成功！已切换为白色主题。请在浏览器中打开 diary.svg 预览。")
 
 if __name__ == "__main__":
-    text = fetch_latest_diary()
-    generate_svg(text)
-    print("SVG Generated Successfully!")
+    generate_white_masonry_svg()
