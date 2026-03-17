@@ -1,0 +1,36 @@
+name: Update Diary SVG
+
+on:
+  issues:
+    types: [opened, edited] # 当你新建或修改 issue 时触发
+  schedule:
+    - cron: '0 0 * * *' # 每天凌晨保底更新一次
+  workflow_dispatch: # 允许你手动点击运行
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install Dependencies
+        run: pip install requests
+
+      - name: Generate Diary SVG
+        run: python generate_diary_svg.py
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # 引擎自带 token，用于调用 API
+
+      - name: Commit and Push
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add diary.svg
+          git commit -m "docs: 自动更新滚动日记墙 [skip ci]" || exit 0
+          git push
