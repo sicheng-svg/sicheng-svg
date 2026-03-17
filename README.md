@@ -26,5 +26,14 @@
 ## 🛠️ Tech Stack
 
 <p align="center">
-  <img src="https://skillicons.dev/icons?i=c,cpp,python,go,redis,mongodb,mysql,rabbitmq,kafka,langchian,linux,git,github,vim,vscode&perline=10" />
+  <img src="https://skillicons.dev/icons?i=cpp,python,go,redis,mongodb,mysql,linux,docker,git,vscode&perline=10" />
+</p>
+
+---
+
+## ⚙️ GitHub Analytics
+
+<p align="center">
+  <img height="180" src="https://github-readme-stats.vercel.app/api?username=sicheng-svg&show_icons=true&theme=gotham&hide_border=false&title_color=2aa889&icon_color=2aa889&text_color=99d1ce&bg_color=0d1117&count_private=true&custom_title=My%20GitHub%20Statistics" />
+  <img height="180" src="https://github-readme-stats.vercel.app/api/top-langs/?username=sicheng-svg&layout=compact&theme=gotham&hide_border=false&title_color=2aa889&text_color=99d1ce&bg_color=0d1117&langs_count=8&custom_title=My%20Top%20Used%20Languages" />
 </p>
