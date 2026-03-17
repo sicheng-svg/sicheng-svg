@@ -61,6 +61,7 @@
 
 <p align="center">
   <a href="3330826680@qq.com"><img src="https://img.shields.io/badge/WeChat-07C160?style=flat&logo=wechat&logoColor=white" /></a>
+  <a href="3330826680"><img src="https://img.shields.io/badge/QQ-1EBAFC?style=flat&logo=qq&logoColor=white" /></a>
   <a href="https://t.me/sichengxia"><img src="https://img.shields.io/badge/Telegram-26A5E4?style=flat&logo=telegram&logoColor=white" /></a>
   <a href="https://www.tiktok.com/@sichengxia"><img src="https://img.shields.io/badge/TikTok-000000?style=flat&logo=tiktok&logoColor=white" /></a>
   <a href="https://www.youtube.com/@sichengxia"><img src="https://img.shields.io/badge/YouTube-FF0000?style=flat&logo=youtube&logoColor=white" /></a>
@@ -72,6 +73,6 @@
 ## 🔥 GitHub Analytics
 
 <p align="center">
-  <img height="180" src="https://github-readme-stats.vercel.app/api?username=sicheng-svg&show_icons=true&theme=gotham&hide_border=false&title_color=2aa889&icon_color=2aa889&text_color=99d1ce&bg_color=0d1117&count_private=true&custom_title=My%20GitHub%20Statistics" />
-  <img height="180" src="https://github-readme-stats.vercel.app/api/top-langs/?username=sicheng-svg&layout=compact&theme=gotham&hide_border=false&title_color=2aa889&text_color=99d1ce&bg_color=0d1117&langs_count=8&custom_title=My%20Top%20Used%20Languages&card_width=450" />
+  <img width="49%" height="195" src="https://github-readme-stats.vercel.app/api?username=sicheng-svg&show_icons=true&theme=gotham&hide_border=false&title_color=2aa889&icon_color=2aa889&text_color=99d1ce&bg_color=0d1117&count_private=true&custom_title=My%20GitHub%20Statistics" />
+  <img width="49%" height="195" src="https://github-readme-stats.vercel.app/api/top-langs/?username=sicheng-svg&layout=compact&theme=gotham&hide_border=false&title_color=2aa889&text_color=99d1ce&bg_color=0d1117&langs_count=8&custom_title=My%20Top%20Used%20Languages" />
 </p>
