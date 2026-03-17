@@ -76,3 +76,5 @@
   <img width="49%" height="195" src="https://github-readme-stats.vercel.app/api?username=sicheng-svg&show_icons=true&theme=gotham&hide_border=false&title_color=2aa889&icon_color=2aa889&text_color=99d1ce&bg_color=0d1117&count_private=true&custom_title=My%20GitHub%20Statistics" />
   <img width="49%" height="195" src="https://github-readme-stats.vercel.app/api/top-langs/?username=sicheng-svg&layout=compact&theme=gotham&hide_border=false&title_color=2aa889&text_color=99d1ce&bg_color=0d1117&langs_count=8&custom_title=My%20Top%20Used%20Languages" />
 </p>
+
+<img src="./diary.svg" alt="Dynamic Diary Stream" />
