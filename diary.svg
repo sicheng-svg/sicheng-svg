@@ -1,0 +1,12 @@
+<svg width="800" height="40" xmlns="http://www.w3.org/2000/svg">
+    <style>
+        .text { font-family: 'Fira Code', monospace, sans-serif; font-size: 16px; fill: #58A6FF; }
+    </style>
+    <rect width="100%" height="100%" fill="#0d1117" rx="8"/>
+    <g>
+        <text x="800" y="25" class="text" white-space="nowrap">
+            [2026-03-17] test 🌟 
+        </text>
+        <animateTransform attributeName="transform" type="translate" from="0 0" to="-1500 0" begin="0s" dur="20s" repeatCount="indefinite" />
+    </g>
+</svg>
