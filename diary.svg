@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="850" height="431" viewBox="0 0 850 431">
+<svg xmlns="http://www.w3.org/2000/svg" width="850" height="407" viewBox="0 0 850 407">
   <defs>
     <style>
       @keyframes row0 {
@@ -6,52 +6,56 @@
         100% { transform: translateX(-260px); }
       }
       .row0 { animation: row0 28s linear infinite; }
+      @keyframes row1 {
+        0% { transform: translateX(-120px); }
+        100% { transform: translateX(-380px); }
+      }
+      .row1 { animation: row1 34s linear infinite; }
       .card {
         rx: 10; ry: 10;
-        fill: #0d1117;
-        stroke: #21262d;
+        fill: #ffffff;
+        stroke: #d0d7de;
         stroke-width: 1;
       }
       .date {
         font-family: 'Segoe UI', Ubuntu, sans-serif;
         font-size: 11px;
-        fill: #58A6FF;
+        fill: #0969da;
       }
       .text {
         font-family: 'Segoe UI', Ubuntu, sans-serif;
         font-size: 12.5px;
-        fill: #c9d1d9;
+        fill: #1f2328;
       }
       .tag {
         font-family: 'Segoe UI', Ubuntu, sans-serif;
         font-size: 10px;
-        fill: #8b949e;
+        fill: #656d76;
       }
     </style>
     <linearGradient id="fade-left" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#010409" stop-opacity="1"/>
-      <stop offset="5%" stop-color="#010409" stop-opacity="0"/>
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="1"/>
+      <stop offset="5%" stop-color="#ffffff" stop-opacity="0"/>
     </linearGradient>
     <linearGradient id="fade-right" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="95%" stop-color="#010409" stop-opacity="0"/>
-      <stop offset="100%" stop-color="#010409" stop-opacity="1"/>
+      <stop offset="95%" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="1"/>
     </linearGradient>
   </defs>
 
-  <rect width="850" height="431" rx="12" fill="#010409" />
-  <text x="20" y="28" font-family="'Segoe UI', Ubuntu, sans-serif" font-size="15" font-weight="600" fill="#58A6FF">💭 Thoughts &amp; Notes</text>
+  <rect width="850" height="407" rx="12" fill="#ffffff" />
 
-  <clipPath id="clip0"><rect x="0" y="40" width="850" height="131" /></clipPath>
+  <clipPath id="clip0"><rect x="0" y="10" width="850" height="131" /></clipPath>
   <g clip-path="url(#clip0)">
     <g class="row0">
-      <g transform="translate(0, 45)">
+      <g transform="translate(0, 15)">
         <rect class="card" width="240" height="116" />
         <text class="date" x="14" y="24">2026-03-19</text>
         <text class="text" x="14" y="48">今天学了什么</text>
         <text class="text" x="14" y="67">第二行内容</text>
         <text class="tag" x="14" y="104">#template</text>
       </g>
-      <g transform="translate(260, 45)">
+      <g transform="translate(260, 15)">
         <rect class="card" width="240" height="116" />
         <text class="date" x="14" y="24">2026-03-19</text>
         <text class="text" x="14" y="48">今天学了什么</text>
@@ -60,9 +64,27 @@
       </g>
     </g>
   </g>
+  <clipPath id="clip1"><rect x="0" y="141" width="850" height="131" /></clipPath>
+  <g clip-path="url(#clip1)">
+    <g class="row1">
+      <g transform="translate(0, 146)">
+        <rect class="card" width="240" height="116" />
+        <text class="date" x="14" y="24">2026-03-18</text>
+        <text class="text" x="14" y="48">今天学了什么</text>
+        <text class="text" x="14" y="67">第二行内容</text>
+        <text class="tag" x="14" y="104">#template</text>
+      </g>
+      <g transform="translate(260, 146)">
+        <rect class="card" width="240" height="116" />
+        <text class="date" x="14" y="24">2026-03-18</text>
+        <text class="text" x="14" y="48">今天学了什么</text>
+        <text class="text" x="14" y="67">第二行内容</text>
+        <text class="tag" x="14" y="104">#template</text>
+      </g>
+    </g>
+  </g>
 
 
-
-  <rect width="850" height="431" fill="url(#fade-left)" pointer-events="none" />
-  <rect width="850" height="431" fill="url(#fade-right)" pointer-events="none" />
+  <rect width="850" height="407" fill="url(#fade-left)" pointer-events="none" />
+  <rect width="850" height="407" fill="url(#fade-right)" pointer-events="none" />
 </svg>
