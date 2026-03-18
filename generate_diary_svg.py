@@ -23,7 +23,7 @@ ROW_CONFIGS = [
 ]
 
 SVG_W = 850
-HEADER_H = 40
+HEADER_H = 10
 ROW_GAP = 15  # 行与行之间的间距
 
 
@@ -145,38 +145,37 @@ def build_svg():
 {styles}
       .card {{
         rx: 10; ry: 10;
-        fill: #0d1117;
-        stroke: #21262d;
+        fill: #ffffff;
+        stroke: #d0d7de;
         stroke-width: 1;
       }}
       .date {{
         font-family: 'Segoe UI', Ubuntu, sans-serif;
         font-size: 11px;
-        fill: #58A6FF;
+        fill: #0969da;
       }}
       .text {{
         font-family: 'Segoe UI', Ubuntu, sans-serif;
         font-size: 12.5px;
-        fill: #c9d1d9;
+        fill: #1f2328;
       }}
       .tag {{
         font-family: 'Segoe UI', Ubuntu, sans-serif;
         font-size: 10px;
-        fill: #8b949e;
+        fill: #656d76;
       }}
     </style>
     <linearGradient id="fade-left" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#010409" stop-opacity="1"/>
-      <stop offset="5%" stop-color="#010409" stop-opacity="0"/>
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="1"/>
+      <stop offset="5%" stop-color="#ffffff" stop-opacity="0"/>
     </linearGradient>
     <linearGradient id="fade-right" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="95%" stop-color="#010409" stop-opacity="0"/>
-      <stop offset="100%" stop-color="#010409" stop-opacity="1"/>
+      <stop offset="95%" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="1"/>
     </linearGradient>
   </defs>
 
-  <rect width="{SVG_W}" height="{SVG_H}" rx="12" fill="#010409" />
-  <text x="20" y="28" font-family="'Segoe UI', Ubuntu, sans-serif" font-size="15" font-weight="600" fill="#58A6FF">💭 Thoughts &amp; Notes</text>
+  <rect width="{SVG_W}" height="{SVG_H}" rx="12" fill="#ffffff" />
 
 {chr(10).join(row_svgs)}
 
