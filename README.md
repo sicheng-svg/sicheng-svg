@@ -77,7 +77,9 @@
   <img width="49%" height="195" src="https://github-readme-stats.vercel.app/api/top-langs/?username=sicheng-svg&layout=compact&theme=gotham&hide_border=false&title_color=2aa889&text_color=99d1ce&bg_color=0d1117&langs_count=8&custom_title=My%20Top%20Used%20Languages" />
 </p>
 
-<img src="./diary.svg" alt="Dynamic Diary Stream" />
+<p align="center">
+  <img src="https://raw.githubusercontent.com/sicheng-svg/sicheng-svg/main/diary.svg?v=1" width="100%" />
+</p>
 
 
 
