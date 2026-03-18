@@ -83,5 +83,5 @@
 ## 💭 Thoughts & Notes
 
 <p align="center">
-  <img src="./diary.svg?v=1" width="100%" />
+  <img src="./diary.svg?v=2" width="100%" />
 </p>
