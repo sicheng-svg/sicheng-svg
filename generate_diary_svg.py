@@ -1,150 +1,197 @@
-import os
-import requests
-from datetime import datetime
+#!/usr/bin/env python3
+"""从 diary.json 生成三行错位滚动的 diary.svg（卡片高度自适应）"""
 
-# 1. 核心配置：确保从 Action 环境中获取
-REPO = os.getenv("GITHUB_REPOSITORY") # 例如 "sicheng-svg/sicheng-svg"
-TOKEN = os.getenv("GITHUB_TOKEN")
+import json
+import html
 
-# 确保在本地测试时也能运行
-if not REPO:
-    REPO = "sicheng-svg/sicheng-svg"  # 替换为你自己的用户名/仓库
-    print(f"Warning: GITHUB_REPOSITORY not set. Using default: {REPO}")
+# ============ 配置 ============
+CARD_W = 240
+GAP = 20
+CARD_STEP = CARD_W + GAP  # 260
 
-# 2. 核心函数：抓取日记数据
-def fetch_diary_issues():
-    # 彻底删除硬编码的示例！
-    
-    # 调用 GitHub API 抓取带有 diary 标签的最新 15 个 issues (每行约 5 个)
-    url = f"https://api.github.com/repos/{REPO}/issues?labels=diary&state=all&per_page=15"
-    headers = {"Authorization": f"token {TOKEN}"} if TOKEN else {}
-    response = requests.get(url, headers=headers)
-    
-    if response.status_code != 200:
-        print(f"Error fetching issues: {response.status_code}")
-        return []
-    
-    issues = response.json()
-    formatted_diary = []
-    
-    for issue in issues:
-        # 格式化日期：'2026-03-17'
-        created_at = datetime.strptime(issue["created_at"][:10], "%Y-%m-%d").strftime("%Y-%m-%d")
-        
-        # 处理标题：截断并添加省略号，防止文本溢出
-        title = issue["title"]
-        # 每行卡片约 12-15 个汉字或 35 个字符
-        max_title_len = 35 
-        if len(title) > max_title_len:
-            title = title[:max_title_len].rstrip() + "..."
-            
-        formatted_diary.append({
-            "date": created_at,
-            "title": title
-        })
-        
-    return formatted_diary
+CARD_PAD_TOP = 30      # 日期区域高度
+LINE_HEIGHT = 19        # 每行文字间距
+LINE_START_Y = 48       # 第一行文字 y 坐标
+TAG_GAP = 16            # 最后一行文字到 tag 的间距
+TAG_H = 20              # tag 底部留白
+CARD_PAD_BOTTOM = 12    # 卡片底部 padding
 
-# 3. 辅助函数：生成单行 SVG 元素
-def build_row_svg_elements(items, start_y):
-    svg_elements = ""
-    current_x = 0
-    box_height = 110
-    gap = 15
-    base_card_width = 200 # 基准卡片宽度
+ROW_CONFIGS = [
+    {"speed": 28, "offset": 0},
+    {"speed": 34, "offset": -120},
+    {"speed": 31, "offset": -60},
+]
 
-    for item in items:
-        # 这里彻底删除了关于图片处理的分支！
-        
-        # 动态计算宽度：基准宽度 + 标题长度系数 (简单处理)
-        # 标题全英文会宽一些，全中文会窄一些。这里简单按字符数估算。
-        text_width_factor = len(item["title"]) * 5 
-        # 这里使用标题字数模运算作为确定性的宽度增量：
-        card_width = base_card_width + text_width_factor + (len(item["title"]) % 4 * 15)
-        
-        # 绘制外框 (亮色主题)
-        svg_elements += f'<rect x="{current_x}" y="{start_y}" width="{card_width}" height="{box_height}" class="box"/>\n'
-        
-        # 绘制日期 (亮色主题)
-        svg_elements += f'<text x="{current_x + 15}" y="{start_y + 30}" class="date">[{item["date"]}]</text>\n'
-        
-        # 绘制标题 (亮色主题, 限制字数)
-        svg_elements += f'<text x="{current_x + 15}" y="{start_y + 60}" class="text">{item["title"]}</text>\n'
-        
-        current_x += card_width + gap
-    
-    # 返回该行的 SVG 元素和总宽度
-    return svg_elements, current_x
+SVG_W = 850
+HEADER_H = 40
+ROW_GAP = 15  # 行与行之间的间距
 
-# 4. 主函数：生成最终 SVG
-def generate_automated_white_masonry_svg():
-    # 画布整体尺寸
-    width = 800
-    height = 400
-    # 动画设置：30秒滚动一圈，更平滑
-    duration = "30s"
 
-    # 获取真实数据
-    all_diary_items = fetch_diary_issues()
-    
-    # 动态分配 Issue 到三行，体现多行交错布局
-    row1_items = [item for i, item in enumerate(all_diary_items) if i % 3 == 0]
-    row2_items = [item for i, item in enumerate(all_diary_items) if i % 3 == 1]
-    row3_items = [item for i, item in enumerate(all_diary_items) if i % 3 == 2]
+def calc_card_height(card):
+    """根据文字行数计算卡片高度"""
+    n_lines = len(card.get("lines", []))
+    return CARD_PAD_TOP + n_lines * LINE_HEIGHT + TAG_GAP + TAG_H + CARD_PAD_BOTTOM
 
-    # 行高与间距设置
-    row_y_positions = [20, 150, 280] # 三行的 Y 坐标
-    
-    # 生成各行 SVG
-    row1_svg, w1 = build_row_svg_elements(row1_items, row_y_positions[0])
-    row2_svg, w2 = build_row_svg_elements(row2_items, row_y_positions[1])
-    row3_svg, w3 = build_row_svg_elements(row3_items, row_y_positions[2])
 
-    # 找出最长的一行作为整体循环的平移基准跨度
-    max_width = max(w1, w2, w3)
+def escape(text):
+    return html.escape(text)
 
-    # 错误处理：如果没有日记，展示默认友好提示
-    if not all_diary_items:
-        max_width = 800 # 保证动画正常
-        default_message_svg = f"""
-        <rect x="0" y="145" width="800" height="110" class="box"/>
-        <text x="400" y="195" class="text" text-anchor="middle">👋 还没有更新日记哦。在 Issues 里新建一条 diary 标签记录吧！</text>
-        """
-        row1_svg, row2_svg, row3_svg = default_message_svg, "", ""
 
-    # SVG 模板拼接 - 已全部调整为白色/白色亮色模式主题
-    svg_content = f"""<svg width="{width}" height="{height}" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+# ============ 加载数据 ============
+with open("diary.json", "r", encoding="utf-8") as f:
+    cards = json.load(f)
+
+# 将卡片分成3行（轮流分配）
+rows = [[] for _ in ROW_CONFIGS]
+for i, card in enumerate(cards):
+    rows[i % len(rows)].append(card)
+
+# 计算每行的高度（取该行最高卡片）
+row_heights = []
+for row_cards in rows:
+    if row_cards:
+        max_h = max(calc_card_height(c) for c in row_cards)
+    else:
+        max_h = 110
+    row_heights.append(max_h)
+
+# 计算总 SVG 高度
+SVG_H = HEADER_H + sum(row_heights) + ROW_GAP * len(ROW_CONFIGS) + 10
+
+
+def render_card(card, x, y, row_h):
+    """渲染单张卡片，高度使用该行统一高度"""
+    parts = []
+    parts.append(f'      <g transform="translate({x}, {y})">')
+    parts.append(f'        <rect class="card" width="{CARD_W}" height="{row_h}" />')
+    parts.append(f'        <text class="date" x="14" y="24">{escape(card["date"])}</text>')
+
+    lines = card.get("lines", [])
+    for j, line in enumerate(lines):
+        ly = LINE_START_Y + j * LINE_HEIGHT
+        parts.append(f'        <text class="text" x="14" y="{ly}">{escape(line)}</text>')
+
+    tag = card.get("tag", "")
+    if tag:
+        tag_y = row_h - CARD_PAD_BOTTOM
+        parts.append(f'        <text class="tag" x="14" y="{tag_y}">{escape(tag)}</text>')
+
+    parts.append(f'      </g>')
+    return "\n".join(parts)
+
+
+def render_row(row_cards, row_index, y_offset):
+    """渲染一行（含两组卡片实现无缝循环）"""
+    cfg = ROW_CONFIGS[row_index]
+    n = len(row_cards)
+    if n == 0:
+        return ""
+
+    total_w = n * CARD_STEP
+    row_h = row_heights[row_index]
+    clip_h = row_h + ROW_GAP
+    clip_id = f"clip{row_index}"
+
+    parts = []
+    parts.append(f'  <clipPath id="{clip_id}"><rect x="0" y="{y_offset}" width="{SVG_W}" height="{clip_h}" /></clipPath>')
+    parts.append(f'  <g clip-path="url(#{clip_id})">')
+    parts.append(f'    <g class="row{row_index}">')
+
+    # 第1组
+    for i, card in enumerate(row_cards):
+        x = i * CARD_STEP
+        parts.append(render_card(card, x, y_offset + 5, row_h))
+
+    # 第2组（无缝循环）
+    for i, card in enumerate(row_cards):
+        x = total_w + i * CARD_STEP
+        parts.append(render_card(card, x, y_offset + 5, row_h))
+
+    parts.append(f'    </g>')
+    parts.append(f'  </g>')
+
+    return "\n".join(parts)
+
+
+def build_svg():
+    """构建完整 SVG"""
+    # 动画 keyframes
+    keyframes = []
+    for i, cfg in enumerate(ROW_CONFIGS):
+        n = len(rows[i])
+        if n == 0:
+            continue
+        total_w = n * CARD_STEP
+        offset = cfg["offset"]
+        speed = cfg["speed"]
+        keyframes.append(f"""      @keyframes row{i} {{
+        0% {{ transform: translateX({offset}px); }}
+        100% {{ transform: translateX({offset - total_w}px); }}
+      }}
+      .row{i} {{ animation: row{i} {speed}s linear infinite; }}""")
+
+    styles = "\n".join(keyframes)
+
+    # 计算每行 y 偏移
+    row_svgs = []
+    y_offset = HEADER_H
+    for i in range(len(ROW_CONFIGS)):
+        row_svgs.append(render_row(rows[i], i, y_offset))
+        y_offset += row_heights[i] + ROW_GAP
+
+    svg = f"""<svg xmlns="http://www.w3.org/2000/svg" width="{SVG_W}" height="{SVG_H}" viewBox="0 0 {SVG_W} {SVG_H}">
+  <defs>
     <style>
-        /* 亮色主题卡片和边框 */
-        .box {{ fill: #f6f8fa; stroke: #d1d5da; stroke-width: 1.5px; rx: 8px; }}
-        /* 深色主题文本 */
-        .text {{ font-family: 'Fira Code', monospace, 'Microsoft YaHei', sans-serif; font-size: 14px; fill: #24292e; font-weight: bold; }}
-        /* 亮色日期蓝色 */
-        .date {{ font-family: 'Fira Code', monospace; font-size: 12px; fill: #0366d6; }}
+{styles}
+      .card {{
+        rx: 10; ry: 10;
+        fill: #0d1117;
+        stroke: #21262d;
+        stroke-width: 1;
+      }}
+      .date {{
+        font-family: 'Segoe UI', Ubuntu, sans-serif;
+        font-size: 11px;
+        fill: #58A6FF;
+      }}
+      .text {{
+        font-family: 'Segoe UI', Ubuntu, sans-serif;
+        font-size: 12.5px;
+        fill: #c9d1d9;
+      }}
+      .tag {{
+        font-family: 'Segoe UI', Ubuntu, sans-serif;
+        font-size: 10px;
+        fill: #8b949e;
+      }}
     </style>
-    
-    <rect width="100%" height="100%" fill="#ffffff" rx="8"/>
-    
-    <g>
-        <animateTransform attributeName="transform" type="translate" from="0 0" to="-{max_width} 0" begin="0s" dur="{duration}" repeatCount="indefinite" />
-        
-        <g>
-            {row1_svg}
-            {row2_svg}
-            {row3_svg}
-        </g>
-        
-        <g transform="translate({max_width}, 0)">
-            {row1_svg}
-            {row2_svg}
-            {row3_svg}
-        </g>
-    </g>
+    <linearGradient id="fade-left" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#010409" stop-opacity="1"/>
+      <stop offset="5%" stop-color="#010409" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="fade-right" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="95%" stop-color="#010409" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#010409" stop-opacity="1"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="{SVG_W}" height="{SVG_H}" rx="12" fill="#010409" />
+  <text x="20" y="28" font-family="'Segoe UI', Ubuntu, sans-serif" font-size="15" font-weight="600" fill="#58A6FF">💭 Thoughts &amp; Notes</text>
+
+{chr(10).join(row_svgs)}
+
+  <rect width="{SVG_W}" height="{SVG_H}" fill="url(#fade-left)" pointer-events="none" />
+  <rect width="{SVG_W}" height="{SVG_H}" fill="url(#fade-right)" pointer-events="none" />
 </svg>"""
 
-    with open("diary.svg", "w", encoding="utf-8") as f:
-        f.write(svg_content)
-    print(f"生成成功！已切换为全自动化亮色日记墙。抓取到 {len(all_diary_items)} 条记录。")
+    return svg
+
 
 if __name__ == "__main__":
-    generate_automated_white_masonry_svg()
+    svg_content = build_svg()
+    with open("diary.svg", "w", encoding="utf-8") as f:
+        f.write(svg_content)
+    for i, row in enumerate(rows):
+        max_lines = max(len(c.get("lines", [])) for c in row) if row else 0
+        print(f"  Row {i+1}: {len(row)} cards, max {max_lines} lines, height {row_heights[i]}px")
+    print(f"Generated diary.svg ({sum(len(r) for r in rows)} cards, SVG height {SVG_H}px)")
