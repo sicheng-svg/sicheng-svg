@@ -11,7 +11,6 @@
   <img src="https://komarev.com/ghpvc/?username=sicheng-svg&color=58a6ff&style=flat-square&label=Profile+Views" alt="Profile Views">
 </p>
 
----
 
 ## 🧑‍💻 About Me
 
@@ -78,10 +77,8 @@
 
 <br>
 
----
-
 ## 💭 Thoughts & Notes
 
 <p align="center">
-  <img src="./diary.svg?v=2" width="100%" />
+  <img src="./diary.svg?v=3" width="100%" />
 </p>
