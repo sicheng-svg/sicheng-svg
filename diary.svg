@@ -3,17 +3,17 @@
     <style>
       @keyframes row0 {
         0% { transform: translateX(0px); }
-        100% { transform: translateX(-1300px); }
+        100% { transform: translateX(-2600px); }
       }
       .row0 { animation: row0 28s linear infinite; }
       @keyframes row1 {
         0% { transform: translateX(-120px); }
-        100% { transform: translateX(-1160px); }
+        100% { transform: translateX(-2720px); }
       }
       .row1 { animation: row1 34s linear infinite; }
       @keyframes row2 {
         0% { transform: translateX(-60px); }
-        100% { transform: translateX(-1100px); }
+        100% { transform: translateX(-2400px); }
       }
       .row2 { animation: row2 31s linear infinite; }
       .card {
@@ -102,13 +102,59 @@
       <g transform="translate(1300, 15)">
         <rect class="card" width="240" height="173" />
         <text class="date" x="14" y="24">2026-03-26</text>
+        <text class="text" x="14" y="48">构造Record→序列化→选分区</text>
+        <text class="text" x="14" y="67">hash(key)%N / 轮询 / 指定分区</text>
+        <text class="text" x="14" y="86">攒batch→Sender线程批量发Leader</text>
+        <text class="text" x="14" y="105">acks=0不等/1等Leader/all等ISR</text>
+        <text class="tag" x="14" y="161">Kafka · Producer发送流程</text>
+      </g>
+      <g transform="translate(1560, 15)">
+        <rect class="card" width="240" height="173" />
+        <text class="date" x="14" y="24">2026-03-26</text>
+        <text class="text" x="14" y="48">Offset是Partition内的递增编号</text>
+        <text class="text" x="14" y="67">消费进度存在__consumer_offsets中</text>
+        <text class="text" x="14" y="86">维度: group.id + topic + partition</text>
+        <text class="text" x="14" y="105">支持自动提交和手动提交</text>
+        <text class="tag" x="14" y="161">Kafka · Offset管理</text>
+      </g>
+      <g transform="translate(1820, 15)">
+        <rect class="card" width="240" height="173" />
+        <text class="date" x="14" y="24">2026-03-26</text>
+        <text class="text" x="14" y="48">消息消费后不删除，保留可回溯</text>
+        <text class="text" x="14" y="67">适合日志收集、流处理、事件溯源</text>
+        <text class="text" x="14" y="86">大数据生态集成: Flink/Spark/HDFS</text>
+        <text class="text" x="14" y="105">百万级TPS，天然适合高吞吐场景</text>
+        <text class="tag" x="14" y="161">Kafka · 使用场景</text>
+      </g>
+      <g transform="translate(2080, 15)">
+        <rect class="card" width="240" height="173" />
+        <text class="date" x="14" y="24">2026-03-26</text>
+        <text class="text" x="14" y="48">Direct: routing_key精确匹配</text>
+        <text class="text" x="14" y="67">Fanout: 无条件广播到所有绑定队列</text>
+        <text class="text" x="14" y="86">Topic: 通配符匹配(* 一个词, # 多个)</text>
+        <text class="text" x="14" y="105">Headers: 按消息头键值对匹配</text>
+        <text class="text" x="14" y="124">不同Exchange各自维护Binding表</text>
+        <text class="tag" x="14" y="161">RabbitMQ · Exchange四种类型</text>
+      </g>
+      <g transform="translate(2340, 15)">
+        <rect class="card" width="240" height="173" />
+        <text class="date" x="14" y="24">2026-03-26</text>
+        <text class="text" x="14" y="48">DLX: 消息过期/被拒后进死信交换机</text>
+        <text class="text" x="14" y="67">可实现延迟队列(TTL+DLX组合)</text>
+        <text class="text" x="14" y="86">Mirror Queue做高可用集群</text>
+        <text class="text" x="14" y="105">适合低延迟、复杂路由、任务队列</text>
+        <text class="tag" x="14" y="161">RabbitMQ · 高级特性与场景</text>
+      </g>
+      <g transform="translate(2600, 15)">
+        <rect class="card" width="240" height="173" />
+        <text class="date" x="14" y="24">2026-03-26</text>
         <text class="text" x="14" y="48">Redis作为缓存层拦截请求</text>
         <text class="text" x="14" y="67">命中直接返回，未命中查DB</text>
         <text class="text" x="14" y="86">查完写回Redis，下次命中</text>
         <text class="text" x="14" y="105">内存级速度，保护数据库</text>
         <text class="tag" x="14" y="161">Redis · 缓存基本流程</text>
       </g>
-      <g transform="translate(1560, 15)">
+      <g transform="translate(2860, 15)">
         <rect class="card" width="240" height="173" />
         <text class="date" x="14" y="24">2026-03-26</text>
         <text class="text" x="14" y="48">大量key同时过期或Redis宕机</text>
@@ -118,7 +164,7 @@
         <text class="text" x="14" y="124">本地缓存+DB限流做兜底</text>
         <text class="tag" x="14" y="161">Redis · 缓存雪崩</text>
       </g>
-      <g transform="translate(1820, 15)">
+      <g transform="translate(3120, 15)">
         <rect class="card" width="240" height="173" />
         <text class="date" x="14" y="24">2026-03-26</text>
         <text class="text" x="14" y="48">RDB: 定时全量快照，二进制文件</text>
@@ -126,7 +172,7 @@
         <text class="text" x="14" y="86">恢复极快，但可能丢快照间数据</text>
         <text class="tag" x="14" y="161">Redis · 持久化 RDB</text>
       </g>
-      <g transform="translate(2080, 15)">
+      <g transform="translate(3380, 15)">
         <rect class="card" width="240" height="173" />
         <text class="date" x="14" y="24">2026-03-26</text>
         <text class="text" x="14" y="48">1主多从: master写，slave读</text>
@@ -135,7 +181,7 @@
         <text class="text" x="14" y="105">局限: master挂了需手动切换</text>
         <text class="tag" x="14" y="161">Redis · 主从复制</text>
       </g>
-      <g transform="translate(2340, 15)">
+      <g transform="translate(3640, 15)">
         <rect class="card" width="240" height="173" />
         <text class="date" x="14" y="24">2026-03-26</text>
         <text class="text" x="14" y="48">list LPUSH/BRPOP做消息队列</text>
@@ -144,6 +190,52 @@
         <text class="text" x="14" y="105">set交并集做社交关系运算</text>
         <text class="text" x="14" y="124">集中式session存储</text>
         <text class="tag" x="14" y="161">Redis · 其他使用场景</text>
+      </g>
+      <g transform="translate(3900, 15)">
+        <rect class="card" width="240" height="173" />
+        <text class="date" x="14" y="24">2026-03-26</text>
+        <text class="text" x="14" y="48">构造Record→序列化→选分区</text>
+        <text class="text" x="14" y="67">hash(key)%N / 轮询 / 指定分区</text>
+        <text class="text" x="14" y="86">攒batch→Sender线程批量发Leader</text>
+        <text class="text" x="14" y="105">acks=0不等/1等Leader/all等ISR</text>
+        <text class="tag" x="14" y="161">Kafka · Producer发送流程</text>
+      </g>
+      <g transform="translate(4160, 15)">
+        <rect class="card" width="240" height="173" />
+        <text class="date" x="14" y="24">2026-03-26</text>
+        <text class="text" x="14" y="48">Offset是Partition内的递增编号</text>
+        <text class="text" x="14" y="67">消费进度存在__consumer_offsets中</text>
+        <text class="text" x="14" y="86">维度: group.id + topic + partition</text>
+        <text class="text" x="14" y="105">支持自动提交和手动提交</text>
+        <text class="tag" x="14" y="161">Kafka · Offset管理</text>
+      </g>
+      <g transform="translate(4420, 15)">
+        <rect class="card" width="240" height="173" />
+        <text class="date" x="14" y="24">2026-03-26</text>
+        <text class="text" x="14" y="48">消息消费后不删除，保留可回溯</text>
+        <text class="text" x="14" y="67">适合日志收集、流处理、事件溯源</text>
+        <text class="text" x="14" y="86">大数据生态集成: Flink/Spark/HDFS</text>
+        <text class="text" x="14" y="105">百万级TPS，天然适合高吞吐场景</text>
+        <text class="tag" x="14" y="161">Kafka · 使用场景</text>
+      </g>
+      <g transform="translate(4680, 15)">
+        <rect class="card" width="240" height="173" />
+        <text class="date" x="14" y="24">2026-03-26</text>
+        <text class="text" x="14" y="48">Direct: routing_key精确匹配</text>
+        <text class="text" x="14" y="67">Fanout: 无条件广播到所有绑定队列</text>
+        <text class="text" x="14" y="86">Topic: 通配符匹配(* 一个词, # 多个)</text>
+        <text class="text" x="14" y="105">Headers: 按消息头键值对匹配</text>
+        <text class="text" x="14" y="124">不同Exchange各自维护Binding表</text>
+        <text class="tag" x="14" y="161">RabbitMQ · Exchange四种类型</text>
+      </g>
+      <g transform="translate(4940, 15)">
+        <rect class="card" width="240" height="173" />
+        <text class="date" x="14" y="24">2026-03-26</text>
+        <text class="text" x="14" y="48">DLX: 消息过期/被拒后进死信交换机</text>
+        <text class="text" x="14" y="67">可实现延迟队列(TTL+DLX组合)</text>
+        <text class="text" x="14" y="86">Mirror Queue做高可用集群</text>
+        <text class="text" x="14" y="105">适合低延迟、复杂路由、任务队列</text>
+        <text class="tag" x="14" y="161">RabbitMQ · 高级特性与场景</text>
       </g>
     </g>
   </g>
@@ -191,6 +283,63 @@
       <g transform="translate(1040, 203)">
         <rect class="card" width="240" height="173" />
         <text class="date" x="14" y="24">2026-03-26</text>
+        <text class="text" x="14" y="48">Broker是Kafka服务进程</text>
+        <text class="text" x="14" y="67">多Broker组成集群，对等关系</text>
+        <text class="text" x="14" y="86">一个Broker被选为Controller</text>
+        <text class="text" x="14" y="105">负责分区Leader选举和管理</text>
+        <text class="tag" x="14" y="161">Kafka · 集群架构</text>
+      </g>
+      <g transform="translate(1300, 203)">
+        <rect class="card" width="240" height="173" />
+        <text class="date" x="14" y="24">2026-03-26</text>
+        <text class="text" x="14" y="48">Consumer主动pull拉取消息</text>
+        <text class="text" x="14" y="67">必须属于一个Consumer Group</text>
+        <text class="text" x="14" y="86">同Group内一个Partition只给一个消费者</text>
+        <text class="text" x="14" y="105">同Group=队列模式(竞争消费)</text>
+        <text class="text" x="14" y="124">不同Group=发布订阅(各消费一份)</text>
+        <text class="tag" x="14" y="161">Kafka · Consumer消费模型</text>
+      </g>
+      <g transform="translate(1560, 203)">
+        <rect class="card" width="240" height="173" />
+        <text class="date" x="14" y="24">2026-03-26</text>
+        <text class="text" x="14" y="48">早期依赖ZooKeeper管理元数据</text>
+        <text class="text" x="14" y="67">KRaft(2.8+)用Raft替代ZK</text>
+        <text class="text" x="14" y="86">Kafka 4.0完全移除ZooKeeper</text>
+        <text class="text" x="14" y="105">部分Broker兼任Controller角色</text>
+        <text class="tag" x="14" y="161">Kafka · ZK到KRaft演进</text>
+      </g>
+      <g transform="translate(1820, 203)">
+        <rect class="card" width="240" height="173" />
+        <text class="date" x="14" y="24">2026-03-26</text>
+        <text class="text" x="14" y="48">Broker就是RabbitMQ服务进程</text>
+        <text class="text" x="14" y="67">实现AMQP 0-9-1协议</text>
+        <text class="text" x="14" y="86">Connection是TCP长连接</text>
+        <text class="text" x="14" y="105">Channel是连接内的逻辑通道</text>
+        <text class="text" x="14" y="124">多Channel复用一条TCP连接</text>
+        <text class="tag" x="14" y="161">RabbitMQ · 基础架构</text>
+      </g>
+      <g transform="translate(2080, 203)">
+        <rect class="card" width="240" height="173" />
+        <text class="date" x="14" y="24">2026-03-26</text>
+        <text class="text" x="14" y="48">Publisher Confirm: Broker确认收到</text>
+        <text class="text" x="14" y="67">Consumer ACK: 消费成功后手动确认</text>
+        <text class="text" x="14" y="86">basic_nack可拒绝并重新入队</text>
+        <text class="text" x="14" y="105">prefetch_count控制预取数量(流控)</text>
+        <text class="tag" x="14" y="161">RabbitMQ · 可靠性保证</text>
+      </g>
+      <g transform="translate(2340, 203)">
+        <rect class="card" width="240" height="173" />
+        <text class="date" x="14" y="24">2026-03-26</text>
+        <text class="text" x="14" y="48">Kafka: 高吞吐/日志/流处理/可回溯</text>
+        <text class="text" x="14" y="67">RabbitMQ: 低延迟/复杂路由/任务队列</text>
+        <text class="text" x="14" y="86">Kafka是pull模式，消费者主动拉取</text>
+        <text class="text" x="14" y="105">RabbitMQ是push模式，Broker推送</text>
+        <text class="text" x="14" y="124">Kafka消息保留，RabbitMQ消费即删</text>
+        <text class="tag" x="14" y="161">Kafka vs RabbitMQ · 选型对比</text>
+      </g>
+      <g transform="translate(2600, 203)">
+        <rect class="card" width="240" height="173" />
+        <text class="date" x="14" y="24">2026-03-26</text>
         <text class="text" x="14" y="48">数据在缓存和DB中都不存在</text>
         <text class="text" x="14" y="67">每次请求都穿透到数据库</text>
         <text class="text" x="14" y="86">解决: 缓存空值 + 布隆过滤器</text>
@@ -198,7 +347,7 @@
         <text class="text" x="14" y="124">说不存在一定不存在(可能误判)</text>
         <text class="tag" x="14" y="161">Redis · 缓存穿透</text>
       </g>
-      <g transform="translate(1300, 203)">
+      <g transform="translate(2860, 203)">
         <rect class="card" width="240" height="173" />
         <text class="date" x="14" y="24">2026-03-26</text>
         <text class="text" x="14" y="48">分布式下本地mutex跨机器不可见</text>
@@ -207,7 +356,7 @@
         <text class="text" x="14" y="105">先GET比对uuid再DEL，防误删</text>
         <text class="tag" x="14" y="161">Redis · 分布式锁基础</text>
       </g>
-      <g transform="translate(1560, 203)">
+      <g transform="translate(3120, 203)">
         <rect class="card" width="240" height="173" />
         <text class="date" x="14" y="24">2026-03-26</text>
         <text class="text" x="14" y="48">AOF: 记录每条写命令到日志</text>
@@ -216,7 +365,7 @@
         <text class="text" x="14" y="105">fork子进程，用最少命令表达数据</text>
         <text class="tag" x="14" y="161">Redis · 持久化 AOF</text>
       </g>
-      <g transform="translate(1820, 203)">
+      <g transform="translate(3380, 203)">
         <rect class="card" width="240" height="173" />
         <text class="date" x="14" y="24">2026-03-26</text>
         <text class="text" x="14" y="48">独立监控进程，盯master状态</text>
@@ -225,6 +374,63 @@
         <text class="text" x="14" y="105">自动提升slave为新master</text>
         <text class="text" x="14" y="124">局限: 写入单点，数据量受限单机</text>
         <text class="tag" x="14" y="161">Redis · 哨兵 Sentinel</text>
+      </g>
+      <g transform="translate(3640, 203)">
+        <rect class="card" width="240" height="173" />
+        <text class="date" x="14" y="24">2026-03-26</text>
+        <text class="text" x="14" y="48">Broker是Kafka服务进程</text>
+        <text class="text" x="14" y="67">多Broker组成集群，对等关系</text>
+        <text class="text" x="14" y="86">一个Broker被选为Controller</text>
+        <text class="text" x="14" y="105">负责分区Leader选举和管理</text>
+        <text class="tag" x="14" y="161">Kafka · 集群架构</text>
+      </g>
+      <g transform="translate(3900, 203)">
+        <rect class="card" width="240" height="173" />
+        <text class="date" x="14" y="24">2026-03-26</text>
+        <text class="text" x="14" y="48">Consumer主动pull拉取消息</text>
+        <text class="text" x="14" y="67">必须属于一个Consumer Group</text>
+        <text class="text" x="14" y="86">同Group内一个Partition只给一个消费者</text>
+        <text class="text" x="14" y="105">同Group=队列模式(竞争消费)</text>
+        <text class="text" x="14" y="124">不同Group=发布订阅(各消费一份)</text>
+        <text class="tag" x="14" y="161">Kafka · Consumer消费模型</text>
+      </g>
+      <g transform="translate(4160, 203)">
+        <rect class="card" width="240" height="173" />
+        <text class="date" x="14" y="24">2026-03-26</text>
+        <text class="text" x="14" y="48">早期依赖ZooKeeper管理元数据</text>
+        <text class="text" x="14" y="67">KRaft(2.8+)用Raft替代ZK</text>
+        <text class="text" x="14" y="86">Kafka 4.0完全移除ZooKeeper</text>
+        <text class="text" x="14" y="105">部分Broker兼任Controller角色</text>
+        <text class="tag" x="14" y="161">Kafka · ZK到KRaft演进</text>
+      </g>
+      <g transform="translate(4420, 203)">
+        <rect class="card" width="240" height="173" />
+        <text class="date" x="14" y="24">2026-03-26</text>
+        <text class="text" x="14" y="48">Broker就是RabbitMQ服务进程</text>
+        <text class="text" x="14" y="67">实现AMQP 0-9-1协议</text>
+        <text class="text" x="14" y="86">Connection是TCP长连接</text>
+        <text class="text" x="14" y="105">Channel是连接内的逻辑通道</text>
+        <text class="text" x="14" y="124">多Channel复用一条TCP连接</text>
+        <text class="tag" x="14" y="161">RabbitMQ · 基础架构</text>
+      </g>
+      <g transform="translate(4680, 203)">
+        <rect class="card" width="240" height="173" />
+        <text class="date" x="14" y="24">2026-03-26</text>
+        <text class="text" x="14" y="48">Publisher Confirm: Broker确认收到</text>
+        <text class="text" x="14" y="67">Consumer ACK: 消费成功后手动确认</text>
+        <text class="text" x="14" y="86">basic_nack可拒绝并重新入队</text>
+        <text class="text" x="14" y="105">prefetch_count控制预取数量(流控)</text>
+        <text class="tag" x="14" y="161">RabbitMQ · 可靠性保证</text>
+      </g>
+      <g transform="translate(4940, 203)">
+        <rect class="card" width="240" height="173" />
+        <text class="date" x="14" y="24">2026-03-26</text>
+        <text class="text" x="14" y="48">Kafka: 高吞吐/日志/流处理/可回溯</text>
+        <text class="text" x="14" y="67">RabbitMQ: 低延迟/复杂路由/任务队列</text>
+        <text class="text" x="14" y="86">Kafka是pull模式，消费者主动拉取</text>
+        <text class="text" x="14" y="105">RabbitMQ是push模式，Broker推送</text>
+        <text class="text" x="14" y="124">Kafka消息保留，RabbitMQ消费即删</text>
+        <text class="tag" x="14" y="161">Kafka vs RabbitMQ · 选型对比</text>
       </g>
     </g>
   </g>
@@ -273,6 +479,52 @@
       <g transform="translate(1040, 391)">
         <rect class="card" width="240" height="173" />
         <text class="date" x="14" y="24">2026-03-26</text>
+        <text class="text" x="14" y="48">Topic是逻辑分组，分为多个Partition</text>
+        <text class="text" x="14" y="67">Partition是数据分布的最小单位</text>
+        <text class="text" x="14" y="86">打散到不同Broker上，不是整块存</text>
+        <text class="text" x="14" y="105">每个Partition有Leader和Follower</text>
+        <text class="text" x="14" y="124">Leader/Follower是Partition级别概念</text>
+        <text class="tag" x="14" y="161">Kafka · Topic与Partition</text>
+      </g>
+      <g transform="translate(1300, 391)">
+        <rect class="card" width="240" height="173" />
+        <text class="date" x="14" y="24">2026-03-26</text>
+        <text class="text" x="14" y="48">Follower从Leader拉数据(pull)</text>
+        <text class="text" x="14" y="67">ISR: 与Leader保持同步的副本集合</text>
+        <text class="text" x="14" y="86">只有ISR中的Follower才能选为新Leader</text>
+        <text class="text" x="14" y="105">acks=all时ISR全部确认才算成功</text>
+        <text class="tag" x="14" y="161">Kafka · 副本与ISR机制</text>
+      </g>
+      <g transform="translate(1560, 391)">
+        <rect class="card" width="240" height="173" />
+        <text class="date" x="14" y="24">2026-03-26</text>
+        <text class="text" x="14" y="48">顺序写磁盘，追加写入segment</text>
+        <text class="text" x="14" y="67">Consumer读用sendfile零拷贝</text>
+        <text class="text" x="14" y="86">数据直接从page cache到网卡</text>
+        <text class="text" x="14" y="105">批量发送+压缩，减少网络开销</text>
+        <text class="tag" x="14" y="161">Kafka · 高吞吐原理</text>
+      </g>
+      <g transform="translate(1820, 391)">
+        <rect class="card" width="240" height="173" />
+        <text class="date" x="14" y="24">2026-03-26</text>
+        <text class="text" x="14" y="48">Producer发消息给Exchange(非Queue)</text>
+        <text class="text" x="14" y="67">Exchange按Binding规则路由到Queue</text>
+        <text class="text" x="14" y="86">Consumer从Queue中取消息消费</text>
+        <text class="text" x="14" y="105">完整链路: P→Exchange→Binding→Q→C</text>
+        <text class="tag" x="14" y="161">RabbitMQ · 消息流转链路</text>
+      </g>
+      <g transform="translate(2080, 391)">
+        <rect class="card" width="240" height="173" />
+        <text class="date" x="14" y="24">2026-03-26</text>
+        <text class="text" x="14" y="48">Queue/Exchange设durable=True</text>
+        <text class="text" x="14" y="67">消息设delivery_mode=2持久化</text>
+        <text class="text" x="14" y="86">三者都持久化才能保证不丢消息</text>
+        <text class="text" x="14" y="105">TTL可设队列级或消息级过期时间</text>
+        <text class="tag" x="14" y="161">RabbitMQ · 持久化与TTL</text>
+      </g>
+      <g transform="translate(2340, 391)">
+        <rect class="card" width="240" height="173" />
+        <text class="date" x="14" y="24">2026-03-26</text>
         <text class="text" x="14" y="48">热点key突然过期</text>
         <text class="text" x="14" y="67">大量并发同时查同一个key</text>
         <text class="text" x="14" y="86">全部未命中，涌向数据库</text>
@@ -280,7 +532,7 @@
         <text class="text" x="14" y="124">或热点数据永不过期+后台更新</text>
         <text class="tag" x="14" y="161">Redis · 缓存击穿</text>
       </g>
-      <g transform="translate(1300, 391)">
+      <g transform="translate(2600, 391)">
         <rect class="card" width="240" height="173" />
         <text class="date" x="14" y="24">2026-03-26</text>
         <text class="text" x="14" y="48">看门狗: 后台线程定期给锁续期</text>
@@ -290,7 +542,7 @@
         <text class="text" x="14" y="124">强一致场景考虑ZK/etcd</text>
         <text class="tag" x="14" y="161">Redis · 分布式锁进阶</text>
       </g>
-      <g transform="translate(1560, 391)">
+      <g transform="translate(2860, 391)">
         <rect class="card" width="240" height="173" />
         <text class="date" x="14" y="24">2026-03-26</text>
         <text class="text" x="14" y="48">重写时前半部分用RDB格式写快照</text>
@@ -299,7 +551,7 @@
         <text class="text" x="14" y="105">兼顾恢复速度和数据完整性</text>
         <text class="tag" x="14" y="161">Redis · 混合持久化</text>
       </g>
-      <g transform="translate(1820, 391)">
+      <g transform="translate(3120, 391)">
         <rect class="card" width="240" height="173" />
         <text class="date" x="14" y="24">2026-03-26</text>
         <text class="text" x="14" y="48">16384个哈希槽分配到多master</text>
@@ -308,6 +560,52 @@
         <text class="text" x="14" y="105">Gossip协议自治，无需哨兵</text>
         <text class="text" x="14" y="124">跨槽操作受限，用hash tag解决</text>
         <text class="tag" x="14" y="161">Redis · Cluster 集群</text>
+      </g>
+      <g transform="translate(3380, 391)">
+        <rect class="card" width="240" height="173" />
+        <text class="date" x="14" y="24">2026-03-26</text>
+        <text class="text" x="14" y="48">Topic是逻辑分组，分为多个Partition</text>
+        <text class="text" x="14" y="67">Partition是数据分布的最小单位</text>
+        <text class="text" x="14" y="86">打散到不同Broker上，不是整块存</text>
+        <text class="text" x="14" y="105">每个Partition有Leader和Follower</text>
+        <text class="text" x="14" y="124">Leader/Follower是Partition级别概念</text>
+        <text class="tag" x="14" y="161">Kafka · Topic与Partition</text>
+      </g>
+      <g transform="translate(3640, 391)">
+        <rect class="card" width="240" height="173" />
+        <text class="date" x="14" y="24">2026-03-26</text>
+        <text class="text" x="14" y="48">Follower从Leader拉数据(pull)</text>
+        <text class="text" x="14" y="67">ISR: 与Leader保持同步的副本集合</text>
+        <text class="text" x="14" y="86">只有ISR中的Follower才能选为新Leader</text>
+        <text class="text" x="14" y="105">acks=all时ISR全部确认才算成功</text>
+        <text class="tag" x="14" y="161">Kafka · 副本与ISR机制</text>
+      </g>
+      <g transform="translate(3900, 391)">
+        <rect class="card" width="240" height="173" />
+        <text class="date" x="14" y="24">2026-03-26</text>
+        <text class="text" x="14" y="48">顺序写磁盘，追加写入segment</text>
+        <text class="text" x="14" y="67">Consumer读用sendfile零拷贝</text>
+        <text class="text" x="14" y="86">数据直接从page cache到网卡</text>
+        <text class="text" x="14" y="105">批量发送+压缩，减少网络开销</text>
+        <text class="tag" x="14" y="161">Kafka · 高吞吐原理</text>
+      </g>
+      <g transform="translate(4160, 391)">
+        <rect class="card" width="240" height="173" />
+        <text class="date" x="14" y="24">2026-03-26</text>
+        <text class="text" x="14" y="48">Producer发消息给Exchange(非Queue)</text>
+        <text class="text" x="14" y="67">Exchange按Binding规则路由到Queue</text>
+        <text class="text" x="14" y="86">Consumer从Queue中取消息消费</text>
+        <text class="text" x="14" y="105">完整链路: P→Exchange→Binding→Q→C</text>
+        <text class="tag" x="14" y="161">RabbitMQ · 消息流转链路</text>
+      </g>
+      <g transform="translate(4420, 391)">
+        <rect class="card" width="240" height="173" />
+        <text class="date" x="14" y="24">2026-03-26</text>
+        <text class="text" x="14" y="48">Queue/Exchange设durable=True</text>
+        <text class="text" x="14" y="67">消息设delivery_mode=2持久化</text>
+        <text class="text" x="14" y="86">三者都持久化才能保证不丢消息</text>
+        <text class="text" x="14" y="105">TTL可设队列级或消息级过期时间</text>
+        <text class="tag" x="14" y="161">RabbitMQ · 持久化与TTL</text>
       </g>
     </g>
   </g>
