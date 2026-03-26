@@ -134,5 +134,170 @@
       "集中式session存储"
     ],
     "tag": "Redis · 其他使用场景"
+  },
+  {
+    "date": "2026-03-26",
+    "lines": [
+      "Broker是Kafka服务进程",
+      "多Broker组成集群，对等关系",
+      "一个Broker被选为Controller",
+      "负责分区Leader选举和管理"
+    ],
+    "tag": "Kafka · 集群架构"
+  },
+  {
+    "date": "2026-03-26",
+    "lines": [
+      "Topic是逻辑分组，分为多个Partition",
+      "Partition是数据分布的最小单位",
+      "打散到不同Broker上，不是整块存",
+      "每个Partition有Leader和Follower",
+      "Leader/Follower是Partition级别概念"
+    ],
+    "tag": "Kafka · Topic与Partition"
+  },
+  {
+    "date": "2026-03-26",
+    "lines": [
+      "构造Record→序列化→选分区",
+      "hash(key)%N / 轮询 / 指定分区",
+      "攒batch→Sender线程批量发Leader",
+      "acks=0不等/1等Leader/all等ISR"
+    ],
+    "tag": "Kafka · Producer发送流程"
+  },
+  {
+    "date": "2026-03-26",
+    "lines": [
+      "Consumer主动pull拉取消息",
+      "必须属于一个Consumer Group",
+      "同Group内一个Partition只给一个消费者",
+      "同Group=队列模式(竞争消费)",
+      "不同Group=发布订阅(各消费一份)"
+    ],
+    "tag": "Kafka · Consumer消费模型"
+  },
+  {
+    "date": "2026-03-26",
+    "lines": [
+      "Follower从Leader拉数据(pull)",
+      "ISR: 与Leader保持同步的副本集合",
+      "只有ISR中的Follower才能选为新Leader",
+      "acks=all时ISR全部确认才算成功"
+    ],
+    "tag": "Kafka · 副本与ISR机制"
+  },
+  {
+    "date": "2026-03-26",
+    "lines": [
+      "Offset是Partition内的递增编号",
+      "消费进度存在__consumer_offsets中",
+      "维度: group.id + topic + partition",
+      "支持自动提交和手动提交"
+    ],
+    "tag": "Kafka · Offset管理"
+  },
+  {
+    "date": "2026-03-26",
+    "lines": [
+      "早期依赖ZooKeeper管理元数据",
+      "KRaft(2.8+)用Raft替代ZK",
+      "Kafka 4.0完全移除ZooKeeper",
+      "部分Broker兼任Controller角色"
+    ],
+    "tag": "Kafka · ZK到KRaft演进"
+  },
+  {
+    "date": "2026-03-26",
+    "lines": [
+      "顺序写磁盘，追加写入segment",
+      "Consumer读用sendfile零拷贝",
+      "数据直接从page cache到网卡",
+      "批量发送+压缩，减少网络开销"
+    ],
+    "tag": "Kafka · 高吞吐原理"
+  },
+  {
+    "date": "2026-03-26",
+    "lines": [
+      "消息消费后不删除，保留可回溯",
+      "适合日志收集、流处理、事件溯源",
+      "大数据生态集成: Flink/Spark/HDFS",
+      "百万级TPS，天然适合高吞吐场景"
+    ],
+    "tag": "Kafka · 使用场景"
+  },
+  {
+    "date": "2026-03-26",
+    "lines": [
+      "Broker就是RabbitMQ服务进程",
+      "实现AMQP 0-9-1协议",
+      "Connection是TCP长连接",
+      "Channel是连接内的逻辑通道",
+      "多Channel复用一条TCP连接"
+    ],
+    "tag": "RabbitMQ · 基础架构"
+  },
+  {
+    "date": "2026-03-26",
+    "lines": [
+      "Producer发消息给Exchange(非Queue)",
+      "Exchange按Binding规则路由到Queue",
+      "Consumer从Queue中取消息消费",
+      "完整链路: P→Exchange→Binding→Q→C"
+    ],
+    "tag": "RabbitMQ · 消息流转链路"
+  },
+  {
+    "date": "2026-03-26",
+    "lines": [
+      "Direct: routing_key精确匹配",
+      "Fanout: 无条件广播到所有绑定队列",
+      "Topic: 通配符匹配(* 一个词, # 多个)",
+      "Headers: 按消息头键值对匹配",
+      "不同Exchange各自维护Binding表"
+    ],
+    "tag": "RabbitMQ · Exchange四种类型"
+  },
+  {
+    "date": "2026-03-26",
+    "lines": [
+      "Publisher Confirm: Broker确认收到",
+      "Consumer ACK: 消费成功后手动确认",
+      "basic_nack可拒绝并重新入队",
+      "prefetch_count控制预取数量(流控)"
+    ],
+    "tag": "RabbitMQ · 可靠性保证"
+  },
+  {
+    "date": "2026-03-26",
+    "lines": [
+      "Queue/Exchange设durable=True",
+      "消息设delivery_mode=2持久化",
+      "三者都持久化才能保证不丢消息",
+      "TTL可设队列级或消息级过期时间"
+    ],
+    "tag": "RabbitMQ · 持久化与TTL"
+  },
+  {
+    "date": "2026-03-26",
+    "lines": [
+      "DLX: 消息过期/被拒后进死信交换机",
+      "可实现延迟队列(TTL+DLX组合)",
+      "Mirror Queue做高可用集群",
+      "适合低延迟、复杂路由、任务队列"
+    ],
+    "tag": "RabbitMQ · 高级特性与场景"
+  },
+  {
+    "date": "2026-03-26",
+    "lines": [
+      "Kafka: 高吞吐/日志/流处理/可回溯",
+      "RabbitMQ: 低延迟/复杂路由/任务队列",
+      "Kafka是pull模式，消费者主动拉取",
+      "RabbitMQ是push模式，Broker推送",
+      "Kafka消息保留，RabbitMQ消费即删"
+    ],
+    "tag": "Kafka vs RabbitMQ · 选型对比"
   }
 ]
