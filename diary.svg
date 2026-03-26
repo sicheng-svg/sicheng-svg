@@ -1,16 +1,21 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="850" height="407" viewBox="0 0 850 407">
+<svg xmlns="http://www.w3.org/2000/svg" width="850" height="584" viewBox="0 0 850 584">
   <defs>
     <style>
       @keyframes row0 {
         0% { transform: translateX(0px); }
-        100% { transform: translateX(-260px); }
+        100% { transform: translateX(-1300px); }
       }
       .row0 { animation: row0 28s linear infinite; }
       @keyframes row1 {
         0% { transform: translateX(-120px); }
-        100% { transform: translateX(-380px); }
+        100% { transform: translateX(-1160px); }
       }
       .row1 { animation: row1 34s linear infinite; }
+      @keyframes row2 {
+        0% { transform: translateX(-60px); }
+        100% { transform: translateX(-1100px); }
+      }
+      .row2 { animation: row2 31s linear infinite; }
       .card {
         rx: 10; ry: 10;
         fill: #ffffff;
@@ -43,48 +48,270 @@
     </linearGradient>
   </defs>
 
-  <rect width="850" height="407" rx="12" fill="#ffffff" />
+  <rect width="850" height="584" rx="12" fill="#ffffff" />
 
-  <clipPath id="clip0"><rect x="0" y="10" width="850" height="131" /></clipPath>
+  <clipPath id="clip0"><rect x="0" y="10" width="850" height="188" /></clipPath>
   <g clip-path="url(#clip0)">
     <g class="row0">
       <g transform="translate(0, 15)">
-        <rect class="card" width="240" height="116" />
-        <text class="date" x="14" y="24">2026-03-19</text>
-        <text class="text" x="14" y="48">今天学了什么</text>
-        <text class="text" x="14" y="67">第二行内容</text>
-        <text class="tag" x="14" y="104">#template</text>
+        <rect class="card" width="240" height="173" />
+        <text class="date" x="14" y="24">2026-03-26</text>
+        <text class="text" x="14" y="48">Redis作为缓存层拦截请求</text>
+        <text class="text" x="14" y="67">命中直接返回，未命中查DB</text>
+        <text class="text" x="14" y="86">查完写回Redis，下次命中</text>
+        <text class="text" x="14" y="105">内存级速度，保护数据库</text>
+        <text class="tag" x="14" y="161">Redis · 缓存基本流程</text>
       </g>
       <g transform="translate(260, 15)">
-        <rect class="card" width="240" height="116" />
-        <text class="date" x="14" y="24">2026-03-19</text>
-        <text class="text" x="14" y="48">今天学了什么</text>
-        <text class="text" x="14" y="67">第二行内容</text>
-        <text class="tag" x="14" y="104">#template</text>
+        <rect class="card" width="240" height="173" />
+        <text class="date" x="14" y="24">2026-03-26</text>
+        <text class="text" x="14" y="48">大量key同时过期或Redis宕机</text>
+        <text class="text" x="14" y="67">海量请求失去缓存保护</text>
+        <text class="text" x="14" y="86">解决: TTL加随机值错开过期</text>
+        <text class="text" x="14" y="105">Redis高可用集群防宕机</text>
+        <text class="text" x="14" y="124">本地缓存+DB限流做兜底</text>
+        <text class="tag" x="14" y="161">Redis · 缓存雪崩</text>
+      </g>
+      <g transform="translate(520, 15)">
+        <rect class="card" width="240" height="173" />
+        <text class="date" x="14" y="24">2026-03-26</text>
+        <text class="text" x="14" y="48">RDB: 定时全量快照，二进制文件</text>
+        <text class="text" x="14" y="67">fork子进程+COW，不阻塞主线程</text>
+        <text class="text" x="14" y="86">恢复极快，但可能丢快照间数据</text>
+        <text class="tag" x="14" y="161">Redis · 持久化 RDB</text>
+      </g>
+      <g transform="translate(780, 15)">
+        <rect class="card" width="240" height="173" />
+        <text class="date" x="14" y="24">2026-03-26</text>
+        <text class="text" x="14" y="48">1主多从: master写，slave读</text>
+        <text class="text" x="14" y="67">全量同步: RDB快照+增量命令</text>
+        <text class="text" x="14" y="86">部分重同步: offset+repl_backlog</text>
+        <text class="text" x="14" y="105">局限: master挂了需手动切换</text>
+        <text class="tag" x="14" y="161">Redis · 主从复制</text>
+      </g>
+      <g transform="translate(1040, 15)">
+        <rect class="card" width="240" height="173" />
+        <text class="date" x="14" y="24">2026-03-26</text>
+        <text class="text" x="14" y="48">list LPUSH/BRPOP做消息队列</text>
+        <text class="text" x="14" y="67">zset做实时排行榜</text>
+        <text class="text" x="14" y="86">INCR做计数器/限流</text>
+        <text class="text" x="14" y="105">set交并集做社交关系运算</text>
+        <text class="text" x="14" y="124">集中式session存储</text>
+        <text class="tag" x="14" y="161">Redis · 其他使用场景</text>
+      </g>
+      <g transform="translate(1300, 15)">
+        <rect class="card" width="240" height="173" />
+        <text class="date" x="14" y="24">2026-03-26</text>
+        <text class="text" x="14" y="48">Redis作为缓存层拦截请求</text>
+        <text class="text" x="14" y="67">命中直接返回，未命中查DB</text>
+        <text class="text" x="14" y="86">查完写回Redis，下次命中</text>
+        <text class="text" x="14" y="105">内存级速度，保护数据库</text>
+        <text class="tag" x="14" y="161">Redis · 缓存基本流程</text>
+      </g>
+      <g transform="translate(1560, 15)">
+        <rect class="card" width="240" height="173" />
+        <text class="date" x="14" y="24">2026-03-26</text>
+        <text class="text" x="14" y="48">大量key同时过期或Redis宕机</text>
+        <text class="text" x="14" y="67">海量请求失去缓存保护</text>
+        <text class="text" x="14" y="86">解决: TTL加随机值错开过期</text>
+        <text class="text" x="14" y="105">Redis高可用集群防宕机</text>
+        <text class="text" x="14" y="124">本地缓存+DB限流做兜底</text>
+        <text class="tag" x="14" y="161">Redis · 缓存雪崩</text>
+      </g>
+      <g transform="translate(1820, 15)">
+        <rect class="card" width="240" height="173" />
+        <text class="date" x="14" y="24">2026-03-26</text>
+        <text class="text" x="14" y="48">RDB: 定时全量快照，二进制文件</text>
+        <text class="text" x="14" y="67">fork子进程+COW，不阻塞主线程</text>
+        <text class="text" x="14" y="86">恢复极快，但可能丢快照间数据</text>
+        <text class="tag" x="14" y="161">Redis · 持久化 RDB</text>
+      </g>
+      <g transform="translate(2080, 15)">
+        <rect class="card" width="240" height="173" />
+        <text class="date" x="14" y="24">2026-03-26</text>
+        <text class="text" x="14" y="48">1主多从: master写，slave读</text>
+        <text class="text" x="14" y="67">全量同步: RDB快照+增量命令</text>
+        <text class="text" x="14" y="86">部分重同步: offset+repl_backlog</text>
+        <text class="text" x="14" y="105">局限: master挂了需手动切换</text>
+        <text class="tag" x="14" y="161">Redis · 主从复制</text>
+      </g>
+      <g transform="translate(2340, 15)">
+        <rect class="card" width="240" height="173" />
+        <text class="date" x="14" y="24">2026-03-26</text>
+        <text class="text" x="14" y="48">list LPUSH/BRPOP做消息队列</text>
+        <text class="text" x="14" y="67">zset做实时排行榜</text>
+        <text class="text" x="14" y="86">INCR做计数器/限流</text>
+        <text class="text" x="14" y="105">set交并集做社交关系运算</text>
+        <text class="text" x="14" y="124">集中式session存储</text>
+        <text class="tag" x="14" y="161">Redis · 其他使用场景</text>
       </g>
     </g>
   </g>
-  <clipPath id="clip1"><rect x="0" y="141" width="850" height="131" /></clipPath>
+  <clipPath id="clip1"><rect x="0" y="198" width="850" height="188" /></clipPath>
   <g clip-path="url(#clip1)">
     <g class="row1">
-      <g transform="translate(0, 146)">
-        <rect class="card" width="240" height="116" />
-        <text class="date" x="14" y="24">2026-03-18</text>
-        <text class="text" x="14" y="48">今天学了什么</text>
-        <text class="text" x="14" y="67">第二行内容</text>
-        <text class="tag" x="14" y="104">#template</text>
+      <g transform="translate(0, 203)">
+        <rect class="card" width="240" height="173" />
+        <text class="date" x="14" y="24">2026-03-26</text>
+        <text class="text" x="14" y="48">数据在缓存和DB中都不存在</text>
+        <text class="text" x="14" y="67">每次请求都穿透到数据库</text>
+        <text class="text" x="14" y="86">解决: 缓存空值 + 布隆过滤器</text>
+        <text class="text" x="14" y="105">布隆过滤器用bit数组+k个哈希</text>
+        <text class="text" x="14" y="124">说不存在一定不存在(可能误判)</text>
+        <text class="tag" x="14" y="161">Redis · 缓存穿透</text>
       </g>
-      <g transform="translate(260, 146)">
-        <rect class="card" width="240" height="116" />
-        <text class="date" x="14" y="24">2026-03-18</text>
-        <text class="text" x="14" y="48">今天学了什么</text>
-        <text class="text" x="14" y="67">第二行内容</text>
-        <text class="tag" x="14" y="104">#template</text>
+      <g transform="translate(260, 203)">
+        <rect class="card" width="240" height="173" />
+        <text class="date" x="14" y="24">2026-03-26</text>
+        <text class="text" x="14" y="48">分布式下本地mutex跨机器不可见</text>
+        <text class="text" x="14" y="67">用Redis做共享锁: SET NX PX</text>
+        <text class="text" x="14" y="86">释放用Lua脚本保证原子性</text>
+        <text class="text" x="14" y="105">先GET比对uuid再DEL，防误删</text>
+        <text class="tag" x="14" y="161">Redis · 分布式锁基础</text>
+      </g>
+      <g transform="translate(520, 203)">
+        <rect class="card" width="240" height="173" />
+        <text class="date" x="14" y="24">2026-03-26</text>
+        <text class="text" x="14" y="48">AOF: 记录每条写命令到日志</text>
+        <text class="text" x="14" y="67">fsync策略: always/everysec/no</text>
+        <text class="text" x="14" y="86">文件膨胀→AOF重写(从内存生成)</text>
+        <text class="text" x="14" y="105">fork子进程，用最少命令表达数据</text>
+        <text class="tag" x="14" y="161">Redis · 持久化 AOF</text>
+      </g>
+      <g transform="translate(780, 203)">
+        <rect class="card" width="240" height="173" />
+        <text class="date" x="14" y="24">2026-03-26</text>
+        <text class="text" x="14" y="48">独立监控进程，盯master状态</text>
+        <text class="text" x="14" y="67">SDOWN(主观)→ODOWN(客观,过半)</text>
+        <text class="text" x="14" y="86">Raft选举leader执行故障转移</text>
+        <text class="text" x="14" y="105">自动提升slave为新master</text>
+        <text class="text" x="14" y="124">局限: 写入单点，数据量受限单机</text>
+        <text class="tag" x="14" y="161">Redis · 哨兵 Sentinel</text>
+      </g>
+      <g transform="translate(1040, 203)">
+        <rect class="card" width="240" height="173" />
+        <text class="date" x="14" y="24">2026-03-26</text>
+        <text class="text" x="14" y="48">数据在缓存和DB中都不存在</text>
+        <text class="text" x="14" y="67">每次请求都穿透到数据库</text>
+        <text class="text" x="14" y="86">解决: 缓存空值 + 布隆过滤器</text>
+        <text class="text" x="14" y="105">布隆过滤器用bit数组+k个哈希</text>
+        <text class="text" x="14" y="124">说不存在一定不存在(可能误判)</text>
+        <text class="tag" x="14" y="161">Redis · 缓存穿透</text>
+      </g>
+      <g transform="translate(1300, 203)">
+        <rect class="card" width="240" height="173" />
+        <text class="date" x="14" y="24">2026-03-26</text>
+        <text class="text" x="14" y="48">分布式下本地mutex跨机器不可见</text>
+        <text class="text" x="14" y="67">用Redis做共享锁: SET NX PX</text>
+        <text class="text" x="14" y="86">释放用Lua脚本保证原子性</text>
+        <text class="text" x="14" y="105">先GET比对uuid再DEL，防误删</text>
+        <text class="tag" x="14" y="161">Redis · 分布式锁基础</text>
+      </g>
+      <g transform="translate(1560, 203)">
+        <rect class="card" width="240" height="173" />
+        <text class="date" x="14" y="24">2026-03-26</text>
+        <text class="text" x="14" y="48">AOF: 记录每条写命令到日志</text>
+        <text class="text" x="14" y="67">fsync策略: always/everysec/no</text>
+        <text class="text" x="14" y="86">文件膨胀→AOF重写(从内存生成)</text>
+        <text class="text" x="14" y="105">fork子进程，用最少命令表达数据</text>
+        <text class="tag" x="14" y="161">Redis · 持久化 AOF</text>
+      </g>
+      <g transform="translate(1820, 203)">
+        <rect class="card" width="240" height="173" />
+        <text class="date" x="14" y="24">2026-03-26</text>
+        <text class="text" x="14" y="48">独立监控进程，盯master状态</text>
+        <text class="text" x="14" y="67">SDOWN(主观)→ODOWN(客观,过半)</text>
+        <text class="text" x="14" y="86">Raft选举leader执行故障转移</text>
+        <text class="text" x="14" y="105">自动提升slave为新master</text>
+        <text class="text" x="14" y="124">局限: 写入单点，数据量受限单机</text>
+        <text class="tag" x="14" y="161">Redis · 哨兵 Sentinel</text>
+      </g>
+    </g>
+  </g>
+  <clipPath id="clip2"><rect x="0" y="386" width="850" height="188" /></clipPath>
+  <g clip-path="url(#clip2)">
+    <g class="row2">
+      <g transform="translate(0, 391)">
+        <rect class="card" width="240" height="173" />
+        <text class="date" x="14" y="24">2026-03-26</text>
+        <text class="text" x="14" y="48">热点key突然过期</text>
+        <text class="text" x="14" y="67">大量并发同时查同一个key</text>
+        <text class="text" x="14" y="86">全部未命中，涌向数据库</text>
+        <text class="text" x="14" y="105">解决: 互斥锁只放一个请求查DB</text>
+        <text class="text" x="14" y="124">或热点数据永不过期+后台更新</text>
+        <text class="tag" x="14" y="161">Redis · 缓存击穿</text>
+      </g>
+      <g transform="translate(260, 391)">
+        <rect class="card" width="240" height="173" />
+        <text class="date" x="14" y="24">2026-03-26</text>
+        <text class="text" x="14" y="48">看门狗: 后台线程定期给锁续期</text>
+        <text class="text" x="14" y="67">业务完成停止续期，崩溃则自动过期</text>
+        <text class="text" x="14" y="86">RedLock: 5个独立实例，过半成功</text>
+        <text class="text" x="14" y="105">解决主从切换丢锁问题(有争议)</text>
+        <text class="text" x="14" y="124">强一致场景考虑ZK/etcd</text>
+        <text class="tag" x="14" y="161">Redis · 分布式锁进阶</text>
+      </g>
+      <g transform="translate(520, 391)">
+        <rect class="card" width="240" height="173" />
+        <text class="date" x="14" y="24">2026-03-26</text>
+        <text class="text" x="14" y="48">重写时前半部分用RDB格式写快照</text>
+        <text class="text" x="14" y="67">后半部分用AOF记录重写期间增量</text>
+        <text class="text" x="14" y="86">恢复: 加载RDB(快)+回放AOF(少)</text>
+        <text class="text" x="14" y="105">兼顾恢复速度和数据完整性</text>
+        <text class="tag" x="14" y="161">Redis · 混合持久化</text>
+      </g>
+      <g transform="translate(780, 391)">
+        <rect class="card" width="240" height="173" />
+        <text class="date" x="14" y="24">2026-03-26</text>
+        <text class="text" x="14" y="48">16384个哈希槽分配到多master</text>
+        <text class="text" x="14" y="67">CRC16(key)%16384路由到对应节点</text>
+        <text class="text" x="14" y="86">每个master挂slave做高可用</text>
+        <text class="text" x="14" y="105">Gossip协议自治，无需哨兵</text>
+        <text class="text" x="14" y="124">跨槽操作受限，用hash tag解决</text>
+        <text class="tag" x="14" y="161">Redis · Cluster 集群</text>
+      </g>
+      <g transform="translate(1040, 391)">
+        <rect class="card" width="240" height="173" />
+        <text class="date" x="14" y="24">2026-03-26</text>
+        <text class="text" x="14" y="48">热点key突然过期</text>
+        <text class="text" x="14" y="67">大量并发同时查同一个key</text>
+        <text class="text" x="14" y="86">全部未命中，涌向数据库</text>
+        <text class="text" x="14" y="105">解决: 互斥锁只放一个请求查DB</text>
+        <text class="text" x="14" y="124">或热点数据永不过期+后台更新</text>
+        <text class="tag" x="14" y="161">Redis · 缓存击穿</text>
+      </g>
+      <g transform="translate(1300, 391)">
+        <rect class="card" width="240" height="173" />
+        <text class="date" x="14" y="24">2026-03-26</text>
+        <text class="text" x="14" y="48">看门狗: 后台线程定期给锁续期</text>
+        <text class="text" x="14" y="67">业务完成停止续期，崩溃则自动过期</text>
+        <text class="text" x="14" y="86">RedLock: 5个独立实例，过半成功</text>
+        <text class="text" x="14" y="105">解决主从切换丢锁问题(有争议)</text>
+        <text class="text" x="14" y="124">强一致场景考虑ZK/etcd</text>
+        <text class="tag" x="14" y="161">Redis · 分布式锁进阶</text>
+      </g>
+      <g transform="translate(1560, 391)">
+        <rect class="card" width="240" height="173" />
+        <text class="date" x="14" y="24">2026-03-26</text>
+        <text class="text" x="14" y="48">重写时前半部分用RDB格式写快照</text>
+        <text class="text" x="14" y="67">后半部分用AOF记录重写期间增量</text>
+        <text class="text" x="14" y="86">恢复: 加载RDB(快)+回放AOF(少)</text>
+        <text class="text" x="14" y="105">兼顾恢复速度和数据完整性</text>
+        <text class="tag" x="14" y="161">Redis · 混合持久化</text>
+      </g>
+      <g transform="translate(1820, 391)">
+        <rect class="card" width="240" height="173" />
+        <text class="date" x="14" y="24">2026-03-26</text>
+        <text class="text" x="14" y="48">16384个哈希槽分配到多master</text>
+        <text class="text" x="14" y="67">CRC16(key)%16384路由到对应节点</text>
+        <text class="text" x="14" y="86">每个master挂slave做高可用</text>
+        <text class="text" x="14" y="105">Gossip协议自治，无需哨兵</text>
+        <text class="text" x="14" y="124">跨槽操作受限，用hash tag解决</text>
+        <text class="tag" x="14" y="161">Redis · Cluster 集群</text>
       </g>
     </g>
   </g>
 
-
-  <rect width="850" height="407" fill="url(#fade-left)" pointer-events="none" />
-  <rect width="850" height="407" fill="url(#fade-right)" pointer-events="none" />
+  <rect width="850" height="584" fill="url(#fade-left)" pointer-events="none" />
+  <rect width="850" height="584" fill="url(#fade-right)" pointer-events="none" />
 </svg>
